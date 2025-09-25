@@ -2,8 +2,6 @@ import discord
 from discord.ext import commands
 import json
 import os
-from threading import Thread
-from flask import Flask
 
 # ------------------- Intents -------------------
 intents = discord.Intents.default()
@@ -42,18 +40,6 @@ if os.path.exists(MESSAGE_STORE_FILE):
         MESSAGE_ROLE_MAP = json.load(f)
 else:
     MESSAGE_ROLE_MAP = {}
-
-# ------------------- Flask Web Server (for uptime) -------------------
-app = Flask('')
-
-@app.route('/')
-def home():
-    return "Bot is running!"
-
-def run():
-    app.run(host='0.0.0.0', port=8000)
-
-Thread(target=run).start()
 
 # ------------------- Bot Events -------------------
 @bot.event
@@ -108,13 +94,10 @@ async def on_raw_reaction_remove(payload):
         print(f"Removed {role.name} from {member.name}")
 
 # ------------------- Run Bot -------------------
-# Make sure your token is set as an environment variable:
-# export TOKEN="YOUR_BOT_TOKEN" (Mac/Linux)
-# set TOKEN="YOUR_BOT_TOKEN" (Windows)
 bot.run(os.environ["TOKEN"])
 
-# MTQyMDE2OTA2Nzc3NTUyOTA1MA.GbRUPy.sVCdqU_7XwNboq4fvzy3RLinQYJsCdJL7Yxc0s
 
+# MTQyMDE2OTA2Nzc3NTUyOTA1MA.Gaph0T.nmteLIkQaWTloeoZhV4TqP1p-23Yq-JhWt9Zak
 
 
 
